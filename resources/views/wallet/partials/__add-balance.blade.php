@@ -31,7 +31,7 @@
                     <button type="button" @click="showTopupModal = false"
                         class="bg-gray-200 px-4 py-2 rounded text-gray-700 hover:bg-gray-300 transition">Batal</button>
                     <button type="submit"
-                        class="bg-indigo-600 px-4 py-2 rounded text-white hover:bg-indigo-700 transition">Simpan</button>
+                        class="bg-primary text-light px-4 py-2 rounded-md hover:bg-dark transition">Simpan</button>
                 </div>
             </form>
         </div>
