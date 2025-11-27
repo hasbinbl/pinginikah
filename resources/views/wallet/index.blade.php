@@ -92,7 +92,8 @@
                                         <td
                                             class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium flex justify-end gap-2">
 
-                                            <button @click="showTopupModal = true; selectedWallet = {{ $wallet }}"
+                                            <button
+                                                @click='showTopupModal = true; selectedWallet = @json($wallet)'
                                                 class="text-primary hover:text-dark bg-light border border-primary px-2 py-1 rounded">
                                                 + Topup / Adjust
                                             </button>
@@ -100,13 +101,12 @@
                                             @if ($isMine)
                                                 <div class="flex justify-between items-center gap-2">
                                                     <button
-                                                        @click="showEditModal = true; selectedWallet = {{ $wallet }}"
+                                                        @click='showEditModal = true; selectedWallet = @json($wallet)'
                                                         class="ml-2 text-indigo-600 hover:text-indigo-900">
                                                         Edit
                                                     </button>
 
-                                                    <form action="{{ route('wallet.destroy', $wallet) }}"
-                                                        method="POST"
+                                                    <form action="{{ route('wallet.destroy', $wallet) }}" method="POST"
                                                         onsubmit="return confirm('Hapus Wallet ini? Transaksi lama akan tetap ada tapi tanpa nama Wallet.');">
                                                         @csrf @method('DELETE')
 
@@ -125,9 +125,9 @@
                     </div>
                 </div>
             </div>
+
+            @include('wallet.partials.__add-balance')
+            @include('wallet.partials.__edit')
         </div>
     </div>
-
-    @include('wallet.partials.__add-balance')
-    @include('wallet.partials.__edit')
 </x-app-layout>
