@@ -14,7 +14,7 @@
         </div>
     </x-slot>
 
-    <div class="py-12">
+    <div class="py-6">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
             @if ($wedding)
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -112,9 +112,16 @@
                                         Update Harga
                                     </button>
                                 </form>
-                                <p class="text-xs text-center text-gray-400 mt-2">
-                                    Klik untuk update harga pasar & estimasi budget
-                                </p>
+
+                                <div class="text-center mt-2">
+                                    <p class="text-xs text-gray-500 mt-1 italic">
+                                        @if ($goldPrice && $goldPrice->updated_at)
+                                            Terakhir diupdate: {{ formatDateTime($goldPrice->updated_at) }}
+                                        @else
+                                            Klik untuk update harga emas hari ini
+                                        @endif
+                                    </p>
+                                </div>
                             @endif
                         </div>
                     </div>
