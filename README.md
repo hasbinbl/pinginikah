@@ -18,7 +18,7 @@ A personalized financial tracking application designed to help me (or any couple
     -   Break down the wedding into segments (e.g., _Akad_, _Resepsi_, _Seserahan_).
     -   Track progress bars per segment (Estimated vs. Realized).
 -   **Daily API Safeguard:**
-    -   Implements caching mechanisms to prevent API rate limit exhaustion (updates gold price only once per day or via manual trigger).
+    -   Implements caching mechanisms to prevent API rate limit exhaustion (updates gold price only once per day via manual trigger).
 
 ## 🔄 Simple Flow
 
@@ -53,7 +53,7 @@ A personalized financial tracking application designed to help me (or any couple
 1.  **Clone the repository**
 
     ```bash
-    git clone [https://github.com/yourusername/pinginikah.git](https://github.com/hasbinbl/wedding-prep-tracker.git)
+    git clone https://github.com/hasbinbl/wedding-prep-tracker.git
     cd pinginikah
     ```
 
@@ -77,7 +77,7 @@ A personalized financial tracking application designed to help me (or any couple
     ```env
     DB_CONNECTION=sqlite
     # ...
-    METAL_PRICE_API_KEY=your_actual_api_key_here
+    METAL_PRICE_API_KEY=YOUR_API_KEY
     ```
 
 4.  **Database Setup**
