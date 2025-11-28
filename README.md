@@ -1,66 +1,114 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 💍pinginikah. Simple Wedding Planner (Indonesian)
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A personalized financial tracking application designed to help me (or any couples) plan wedding budget, track progress, and manage savings effectively.
 
-## About Laravel
+> 🚧 **Status: Under Active Development**
+> This project is currently in the early stages of development. Features are subject to change.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 🌟 Core Features
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+-   **Real-time Gold Price Integration:**
+    -   Connects to [MetalPriceAPI](https://metalpriceapi.com) to fetch live gold rates (XAU to IDR).
+    -   **Smart Valuation Logic:** Gold items in your budget automatically adjust their estimated cost based on current market prices _until_ they are marked as purchased. Once bought, the price is locked to the historical cost.
+-   **Couple Wallet Management:**
+    -   Manage individual and shared savings.
+    -   Link wallets to specific users (Groom/Bride).
+    -   Track transaction history for every expense.
+-   **Segmented Budgeting:**
+    -   Break down the wedding into segments (e.g., _Akad_, _Resepsi_, _Seserahan_).
+    -   Track progress bars per segment (Estimated vs. Realized).
+-   **Daily API Safeguard:**
+    -   Implements caching mechanisms to prevent API rate limit exhaustion (updates gold price only once per day or via manual trigger).
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## 🔄 Simple Flow
 
-## Learning Laravel
+1.  **Setup Wallets:** Users input their funding sources (e.g., "John Doe BCA", "Tabungan Emas").
+2.  **Define Project:** Create a Wedding Project and invite the partner.
+3.  **Plan Items:**
+    -   Input items into segments (e.g., "Penghulu", "Catering").
+    -   For Gold items (Mahar or Wedding Rings), set the target weight (e.g., 10 grams). The app calculates the price automatically.
+4.  **Tracking:**
+    -   **Checklist:** When an item is bought/paid, mark it as "Done".
+    -   **Deduction:** The app automatically deducts the amount from the selected Wallet and locks the item price.
+    -   **Progress:** Watch the progress bars increase as you get closer to the big day!
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## 💻 Tech Stack
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+-   **Framework:** Laravel 11
+-   **Auth:** Laravel Breeze
+-   **Styling:** Blade + Tailwind 3
+-   **Database:** SQLite (Default)
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## ⚙️ Installation & Requirements
 
-## Laravel Sponsors
+### Requirements
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+-   PHP 8.2+
+-   Composer
+-   Node.js & NPM
+-   [MetalPriceAPI](https://metalpriceapi.com) Key (Free Account is sufficient)
 
-### Premium Partners
+### Setup Guide
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+1.  **Clone the repository**
 
-## Contributing
+    ```bash
+    git clone [https://github.com/yourusername/pinginikah.git](https://github.com/hasbinbl/wedding-prep-tracker.git)
+    cd pinginikah
+    ```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+2.  **Install Dependencies**
 
-## Code of Conduct
+    ```bash
+    composer install
+    npm install
+    ```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+3.  **Environment Setup**
+    Copy the example env file and configure it.
 
-## Security Vulnerabilities
+    ```bash
+    cp .env.example .env
+    php artisan key:generate
+    ```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+    Open `.env` and set your API Key:
 
-## License
+    ```env
+    DB_CONNECTION=sqlite
+    # ...
+    METAL_PRICE_API_KEY=your_actual_api_key_here
+    ```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+4.  **Database Setup**
+    Create the SQLite database file:
+
+    ```bash
+    touch database/database.sqlite
+    ```
+
+    Run migrations:
+
+    ```bash
+    php artisan migrate
+    ```
+
+5.  **Build Assets**
+
+        ```bash
+        npm run build
+        ```
+
+    **Run**
+
+        ```bash
+        npm run start
+        ```
+
+6.  **Access the App**
+    Open `http://localhost:8000` in your browser.
+
+---
+
+**Note on Gold API:**
+The free tier of MetalPriceAPI has a monthly request limit (maximum 100 request). The application is designed to only check the price for once a day to save your quota via the "Update Price" button on the dashboard.
