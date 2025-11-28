@@ -16,17 +16,17 @@
                 </h3>
 
                 <div class="mb-4">
-                    <label for="edit_account_name" class="block text-sm font-medium text-gray-700">Atas Nama</label>
-                    <input type="text" name="account_name" id="edit_account_name"
-                        x-bind:value="selectedWallet?.account_name" required
-                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                    <x-input-label for="account_name" :value="__('Atas Nama')" />
+                    <x-text-input id="account_name" class="block mt-1 w-full" type="text" name="account_name"
+                        placeholder="e.g. John Doe" :value="$wallet->account_name" />
+                    <x-input-error :messages="$errors->get('account_name')" class="mt-2" />
                 </div>
 
                 <div class="mb-4">
-                    <label for="edit_bank_name" class="block text-sm font-medium text-gray-700">Nama Wallet</label>
-                    <input type="text" name="bank_name" id="edit_bank_name" x-bind:value="selectedWallet?.bank_name"
-                        required
-                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                    <x-input-label for="bank_name" :value="__('Nama Bank atau Wallet')" />
+                    <x-text-input id="bank_name" class="block mt-1 w-full" type="text" name="bank_name"
+                        placeholder="e.g. BCA, Dana, ShopeePay" :value="$wallet->bank_name" />
+                    <x-input-error :messages="$errors->get('bank_name')" class="mt-2" />
                 </div>
 
                 <div class="flex justify-end gap-2">

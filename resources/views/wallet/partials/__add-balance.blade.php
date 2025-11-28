@@ -8,23 +8,26 @@
             class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
             <form x-bind:action="'/wallet/' + selectedWallet?.id + '/add-balance'" method="POST" class="p-6">
                 @csrf
+
                 <h3 class="text-lg leading-6 font-medium text-gray-900 mb-4">
                     Update Saldo: <span x-text="selectedWallet?.bank_name"></span>
                 </h3>
 
                 <div class="mb-4">
-                    <label class="block text-sm font-medium text-gray-700">Aksi</label>
+                    <x-input-label for="substract" :value="__('Aksi')" />
                     <select name="type"
                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                         <option value="add">Tambah Saldo (+)</option>
                         <option value="subtract">Kurangi Saldo (-)</option>
                     </select>
+                    <x-input-error :messages="$errors->get('substract')" class="mt-2" />
                 </div>
 
                 <div class="mb-4">
-                    <label class="block text-sm font-medium text-gray-700">Nominal (Rp)</label>
-                    <input type="number" name="amount" required min="1"
-                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                    <x-input-label for="amount" :value="__('Nominal (IDR)')" />
+                    <x-text-input id="amount" class="block mt-1 w-full" type="number" name="amount"
+                        :value="old('amount', 0)" />
+                    <x-input-error :messages="$errors->get('amount')" class="mt-2" />
                 </div>
 
                 <div class="flex justify-end gap-2">
