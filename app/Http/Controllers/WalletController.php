@@ -86,6 +86,6 @@ class WalletController extends Controller
         if ($wallet->user_id !== auth()->id()) abort(403);
         $wallet->delete();
 
-        return back()->with('status', 'Wallet berhasil dihapus.');
+        return back()->with('success', 'Wallet berhasil dihapus.');
     }
 }
