@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreWalletRequest;
-use App\Http\Requests\UpdateWalletRequest;
+use App\Http\Requests\Wallet\AddBalanceRequest;
+use App\Http\Requests\Wallet\StoreWalletRequest;
+use App\Http\Requests\Wallet\UpdateWalletRequest;
 use App\Models\Wallet;
 use App\Services\WalletService;
 use Illuminate\Http\Request;
@@ -53,7 +54,7 @@ class WalletController extends Controller
         $data = $request->validated();
 
         try {
-            DB::transaction(function () use ($data) {
+            DB::transaction(function () use ($wallet, $data) {
                 $wallet->update($data);
             });
 
@@ -63,20 +64,17 @@ class WalletController extends Controller
         }
     }
 
-    public function addBalance(Request $request, Wallet $wallet)
+    public function addBalance(AddBalanceRequest $request, Wallet $wallet)
     {
         if ($wallet->user_id !== auth()->id()) abort(403);
 
-        $request->validate([
-            'amount' => 'required|numeric|min:1',
-            'type'   => 'required|in:add,subtract'
-        ]);
+        $data = $request->validated();
 
-        DB::transaction(function () use ($wallet, $request) {
-            if ($request->type === 'add') {
-                $wallet->increment('balance', $request->amount);
+        DB::transaction(function () use ($wallet, $data) {
+            if ($data['type'] === 'add') {
+                $wallet->increment('balance', $data['amount']);
             } else {
-                $wallet->decrement('balance', $request->amount);
+                $wallet->decrement('balance', $data['amount']);
             }
         });
 
