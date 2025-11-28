@@ -62,12 +62,13 @@
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
-                                @foreach ($wallets as $wallet)
+                                @forelse ($wallets as $wallet)
                                     @php $isMine = $wallet->user_id === auth()->id(); @endphp
                                     <tr>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            <span
-                                                class="text-sm font-semibold rounded-full text-primary">{{ $wallet->account_name ?? 'Pasangan' }}</span>
+                                            <span class="text-sm font-semibold rounded-full text-primary">
+                                                {{ $wallet->account_name ?? 'Pasangan' }}
+                                            </span>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                                             {{ $wallet->bank_name }}
@@ -77,7 +78,7 @@
                                         </td>
 
                                         <td
-                                            class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium flex justify-end gap-2">
+                                            class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium flex justify-end items-center gap-2">
 
                                             <button
                                                 @click='showTopupModal = true; selectedWallet = @json($wallet)'
@@ -106,7 +107,25 @@
                                             @endif
                                         </td>
                                     </tr>
-                                @endforeach
+                                @empty
+                                    <tr>
+                                        <td colspan="4" class="px-6 py-10 text-center text-gray-500">
+                                            <div class="flex flex-col items-center justify-center">
+                                                <svg class="w-12 h-12 text-gray-300 mb-3" fill="none"
+                                                    stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z">
+                                                    </path>
+                                                </svg>
+                                                <h3 class="text-lg font-medium text-gray-900">Belum ada Wallet</h3>
+                                                <p class="text-sm text-gray-500">Silakan tambahkan dompet atau
+                                                    rekening baru pada form di atas.
+                                                </p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforelse
                             </tbody>
                         </table>
                     </div>

@@ -11,21 +11,27 @@
                 @csrf
                 @method('PUT')
 
+                <input type="hidden" name="wallet_id" x-bind:value="selectedWallet?.id">
+
                 <h3 class="text-lg leading-6 font-medium text-gray-900 mb-4">
                     Edit Wallet
                 </h3>
 
                 <div class="mb-4">
                     <x-input-label for="account_name" :value="__('Atas Nama')" />
+
                     <x-text-input id="account_name" class="block mt-1 w-full" type="text" name="account_name"
-                        placeholder="e.g. John Doe" :value="$wallet->account_name" />
+                        placeholder="e.g. John Doe" x-bind:value="selectedWallet?.account_name" />
+
                     <x-input-error :messages="$errors->get('account_name')" class="mt-2" />
                 </div>
 
                 <div class="mb-4">
                     <x-input-label for="bank_name" :value="__('Nama Bank atau Wallet')" />
+
                     <x-text-input id="bank_name" class="block mt-1 w-full" type="text" name="bank_name"
-                        placeholder="e.g. BCA, Dana, ShopeePay" :value="$wallet->bank_name" />
+                        placeholder="e.g. BCA, Dana, ShopeePay" x-bind:value="selectedWallet?.bank_name" />
+
                     <x-input-error :messages="$errors->get('bank_name')" class="mt-2" />
                 </div>
 
