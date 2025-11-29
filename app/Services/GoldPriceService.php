@@ -37,10 +37,15 @@ class GoldPriceService
                     $pricePerOunceInIdr = (1 / $rateXau) * $rateIdr;
                     $pricePerGram = $pricePerOunceInIdr / 31.1035;
 
-                    GoldPrice::updateOrCreate(
-                        ['id' => 1],
-                        ['price_per_gram' => $pricePerGram]
-                    );
+                    if ($goldPrice) {
+                        $goldPrice->price_per_gram = $pricePerGram;
+                        $goldPrice->updated_at = now();
+                        $goldPrice->save();
+                    } else {
+                        GoldPrice::create([
+                            'price_per_gram' => $pricePerGram
+                        ]);
+                    }
 
                     return [
                         'status'  => 'success',
