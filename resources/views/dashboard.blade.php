@@ -56,7 +56,7 @@
                         Planner!👰‍♀️🤵‍♂️</h3>
                     <p class="text-primary mt-1 mb-4">Mulai perjalanan persiapan pernikahanmu dengan membuat project
                         baru.</p>
-                    <a href="#"
+                    <a href="{{ route('wedding.create') }}"
                         class="inline-flex items-center px-4 py-2 bg-primary border border-transparent rounded-md font-semibold text-xs text-light uppercase tracking-widest hover:bg-dark active:bg-dark focus:outline-none focus:border-primary focus:ring ring-primary disabled:opacity-25 transition ease-in-out duration-150">
                         + Buat Project Wedding
                     </a>
@@ -101,7 +101,7 @@
                                     Terakhir diupdate : {{ formatDateTime($goldPrice->updated_at) }}
                                 </p>
                             @else
-                                <form action="{{ route('gold.refresh') }}" method="POST">
+                                <form action="{{ route('dashboard.refreshGold') }}" method="POST">
                                     @csrf
                                     <button type="submit"
                                         class="w-full bg-primary hover:bg-dark text-light font-semibold py-2 px-4 rounded transition duration-150 flex justify-center items-center gap-2">
