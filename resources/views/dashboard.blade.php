@@ -132,7 +132,7 @@
                         <div class="p-6">
                             <div class="flex justify-between items-center mb-4">
                                 <h3 class="text-lg font-bold text-gray-800">Wallet & Tabungan</h3>
-                                <a href="{{ route('wallets.index') }}"
+                                <a href="{{ route('wallet.index') }}"
                                     class="bg-primary rounded py-1 px-3 text-sm text-light hover:bg-dark font-medium">
                                     + Kelola Wallet
                                 </a>

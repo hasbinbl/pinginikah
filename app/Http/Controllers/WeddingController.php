@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Wedding\StoreWeddingRequest;
+use App\Models\Wedding;
+use App\Models\WeddingSegment;
 use App\Services\WeddingService;
 use Illuminate\Http\Request;
 
@@ -73,7 +75,7 @@ class WeddingController extends Controller
             return redirect()->route('dashboard')->with('error', 'Undangan tidak valid.');
         }
 
-        return view('wedding.accept', compact('title', 'wedding', 'token'));
+        return view('wedding.accept-invitation', compact('title', 'wedding', 'token'));
     }
 
     public function processAcceptInvitation($token)

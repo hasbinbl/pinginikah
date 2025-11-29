@@ -31,29 +31,20 @@
                     </div>
                 </div>
             @elseif($wedding->status === 'pending')
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg border-l-4 border-yellow-400">
+                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg border-l-4 border-primary">
                     <div class="p-8 text-center">
-                        <div class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-yellow-100 mb-4">
-                            <svg class="h-8 w-8 text-yellow-600" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
+                        <div class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-light mb-4">
+                            <svg class="h-8 w-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                             </svg>
                         </div>
 
-                        <h3 class="text-lg font-bold text-gray-900">Menunggu Respon Pasangan ⏳</h3>
-                        <p class="mt-2 text-gray-600">
+                        <h3 class="text-2xl font-bold text-primary">Menunggu Respon Pasangan ⏳</h3>
+                        <p class="text-gray-500 mt-1">
                             Undangan telah dikirim ke notifikasi aplikasi milik
                             <strong>{{ $wedding->partner_email }}</strong>.
                         </p>
-                        <p class="text-xs text-gray-400 mt-4">Status akan berubah otomatis setelah pasangan menerima
-                            undangan.</p>
-
-                        <div class="mt-6">
-                            <button onclick="location.reload()" class="text-sm text-primary underline hover:text-dark">
-                                Refresh Status
-                            </button>
-                        </div>
                     </div>
                 </div>
             @else
@@ -105,7 +96,7 @@
                                 <div class="flex justify-between items-center border-b pb-4 mb-4">
                                     <h3 class="text-lg font-bold text-gray-800">Rincian: {{ $segment->name }}</h3>
 
-                                    <form action="{{ route('segment.destroy', $segment) }}" method="POST"
+                                    <form action="{{ route('wedding-segment.destroy', $segment) }}" method="POST"
                                         onsubmit="return confirm('Yakin hapus bagian {{ $segment->name }}? Semua item didalamnya akan terhapus!');">
                                         @csrf @method('DELETE')
                                         <button type="submit"
@@ -139,7 +130,7 @@
                                 class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full p-6">
                                 <h3 class="text-lg leading-6 font-medium text-gray-900 mb-4">Tambah Bagian Acara Baru
                                 </h3>
-                                <form action="{{ route('segment.store') }}" method="POST">
+                                <form action="{{ route('wedding-segment.store') }}" method="POST">
                                     @csrf
                                     <input type="hidden" name="wedding_id" value="{{ $wedding->id }}">
                                     <div class="mb-4">

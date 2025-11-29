@@ -201,6 +201,14 @@
                                             </template>
                                         </ul>
                                     </div>
+
+                                    <div x-show="query.length >= 3 && results.length === 0"
+                                        class="absolute z-20 w-full bg-white shadow-xl rounded-lg border border-gray-100 mt-2 p-4 text-center"
+                                        style="display: none;" x-transition.opacity.duration.200ms>
+                                        <p class="text-sm text-gray-500">User tidak ditemukan.</p>
+                                        <p class="text-xs text-gray-400">Pastikan pasanganmu sudah mendaftar di
+                                            aplikasi.</p>
+                                    </div>
                                 </div>
 
                                 <div x-show="selectedEmail" style="display: none;" x-transition>
@@ -271,10 +279,7 @@
     </div>
 
     <script>
-        // 1. DATA SEGMENT
         function initSegments() {
-            // Ambil data old dari server dengan aman
-            // Jika old('segments') null, pakai default ['Akad Nikah', 'Resepsi']
             let data = @json(old('segments', ['Akad Nikah', 'Resepsi']));
 
             return {
@@ -288,10 +293,7 @@
             }
         }
 
-        // 2. DATA PARTNER SEARCH
         function initPartner() {
-            // Ambil data old email & name
-            // Jika ada old email, set sebagai default value
             let oldEmail = @json(old('partner_email'));
             let oldName = @json(old('_partner_name_label'));
 
@@ -299,7 +301,7 @@
                 query: '',
                 results: [],
                 selectedEmail: oldEmail || null,
-                selectedName: oldName || (oldEmail ? "User (" + oldEmail + ")" : null), // Fallback name kalau label hilang
+                selectedName: oldName || (oldEmail ? "User (" + oldEmail + ")" : null),
 
                 search() {
                     if (this.query.length < 3) {

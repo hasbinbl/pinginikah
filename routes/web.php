@@ -13,6 +13,12 @@ Route::get('/', function () {
 });
 
 Route::middleware('auth')->group(function () {
+    // notif
+    Route::get('/notifications/mark-read', function () {
+        auth()->user()->unreadNotifications->markAsRead();
+        return back();
+    })->name('notifications.markRead');
+
     // profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -27,7 +33,16 @@ Route::middleware('auth')->group(function () {
     Route::resource('wallet', WalletController::class)->except(['create', 'show', 'edit']);
 
     // wedding
+    Route::get('/wedding/invitation/{token}', [WeddingController::class, 'viewAcceptInvitation'])
+        ->name('wedding.accept-invitation');
+    Route::post('/wedding/invitation/{token}', [WeddingController::class, 'processAcceptInvitation'])
+        ->name('wedding.accept-process');
+
+    Route::post('/wedding/segment', [WeddingController::class, 'storeSegment'])->name('wedding-segment.store');
+    Route::delete('/wedding/segment/{segment}', [WeddingController::class, 'destroySegment'])->name('wedding-segment.destroy');
+
     Route::resource('wedding', WeddingController::class)->except(['show', 'edit']);
+
     Route::get('/api/users/search', [UserController::class, 'getUser']);
 });
 
